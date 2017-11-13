@@ -44,7 +44,12 @@ bool vesc2_command_sent = false;
 
 
 // VESC motor objects
+
+// BOOM SIDE
 VESC vesc1(CANTransceiver); // CAN flexcan
+
+
+// NON-BOOM SIDE
 VESC vesc2(CANTransceiver); // CAN flexcan
 
 /****************************/
@@ -187,6 +192,8 @@ void setup() {
                     VESC2_OFFSET,
                     VESC2_DIRECTION,
                     MAX_CURRENT);
+  Serial.begin(115200);
+
 }
 
 void loop() {
@@ -195,6 +202,11 @@ void loop() {
     
     // IMPORTANT: read any commands sent by the computer
     process_serial();
+
+
+    // IMPORTANT: for some reason the code doesn't work without this function call
+    // Probably has to do with a delay thing
+    print_shit();
 
     /****** Send current messages to VESCs *******/
     // Send position current commands at 200khz aka 5000 us per loop
@@ -208,8 +220,7 @@ void loop() {
 
       // Set the PID constants and position
       // This particular set of arguments sets Kd to 0.05, Ki to 0, Kd to 0.0005, and target position to 0 degrees
-      vesc2.write_pos_and_pid_gains(0.05, 0, 0.0005, 0.0);
-
+      vesc2.write_pos_and_pid_gains(0.03, 0, 0.0005, 0.0);
     }
 
     // This should execute halfway between every RM current command
@@ -218,7 +229,11 @@ void loop() {
 
       // Set the PID constants and position
       // This particular set of arguments sets Kd to 0.05, Ki to 0, and Kd to 0.0005, and target position to 0 degrees
-      vesc1.write_pos_and_pid_gains(0.05, 0, 0.0005, 0.0);
+
+
+      float angle_2 = sin((float)millis()/1000.0)*50.0 + 50.0;
+      Serial.println(angle_2);
+      vesc1.write_pos_and_pid_gains(0.03, 0, 0.0005, angle_2);
     }
     /****** End of sending current messages to VESCs *******/
 
