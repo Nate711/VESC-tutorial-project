@@ -136,9 +136,12 @@ public:
 	float read();
 
 	/**
-	 * Sets up the vesc object to talk over this CAN ID channel
-	 * @param CANID : Which CAN ID to use for this communication channel
-	 */
+   * Sets up the vesc object to talk over this CAN ID channel
+   * @param CANID              integer, channel ID
+   * @param _encoder_offset    float, encoder offset
+   * @param _encoder_direction int
+   * @param _max_current       float, maximum current to send
+   */
 	void attach(int CANID, float _encoder_offset, int _encoder_direction,
 		float _max_current);
 

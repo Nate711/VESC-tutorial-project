@@ -21,7 +21,7 @@
 #include "utils.h"
 
 
-/***** PRIVATE METHODS ******/
+/*************** PRIVATE METHODS ****************/
 
 /**
 * Converts an angle in the vesc encoder reference frame to a normalized angle
@@ -147,7 +147,8 @@ void VESC::_send_position_pid_constants(float kp, float ki, float kd, float pos)
 	CANtx.write(msg);
 }
 
-/***** PUBLIC METHODS ******/
+/*************** PUBLIC METHODS ****************/
+
 /**
  * Constructs VESC object with initial params
  * I dont understand member initializer lists :( but CANtx breaks without it

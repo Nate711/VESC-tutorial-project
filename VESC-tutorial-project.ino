@@ -220,7 +220,7 @@ void loop() {
 
       // Set the PID constants and position
       // This particular set of arguments sets Kd to 0.05, Ki to 0, Kd to 0.0005, and target position to 0 degrees
-      vesc2.write_pos_and_pid_gains(0.03, 0, 0.0005, 0.0);
+      vesc2.write_pos_and_pid_gains(0.05, 0, 0.0005, 0.0);
     }
 
     // This should execute halfway between every RM current command
@@ -229,11 +229,7 @@ void loop() {
 
       // Set the PID constants and position
       // This particular set of arguments sets Kd to 0.05, Ki to 0, and Kd to 0.0005, and target position to 0 degrees
-
-
-      float angle_2 = sin((float)millis()/1000.0)*50.0 + 50.0;
-      Serial.println(angle_2);
-      vesc1.write_pos_and_pid_gains(0.03, 0, 0.0005, angle_2);
+      vesc1.write_pos_and_pid_gains(0.05, 0, 0.0005, 0.0);
     }
     /****** End of sending current messages to VESCs *******/
 
